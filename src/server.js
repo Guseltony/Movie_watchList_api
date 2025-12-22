@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import { connectDB, disconnectDB } from "./config/db.js";
 import authRoute from "./routes/authRoutes.js";
+import watchlistRoute from "./routes/watchlistRoute.js";
 
 connectDB();
 
@@ -9,11 +10,10 @@ connectDB();
 
 const app = express();
 
-
 // Body parsing middlewares
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // port
 
@@ -22,6 +22,7 @@ const PORT = 5555;
 // api endpoints
 
 app.use("/auth", authRoute);
+app.use("/watchlist", watchlistRoute);
 
 // app listen to port
 
