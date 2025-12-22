@@ -9,7 +9,7 @@ const addToWatchlistSchema = z.object({
     .enum(["PLANNED", "WATCHING", "COMPLETED", "DROPPED"], {
       error: () => ({
         message:
-          "Status must be one of. planned, wacthing, completed, dropped ",
+          "Status must be one of: PLANNED, WATCHING, COMPLETED, DROPPED ",
       }),
     })
     .optional(),

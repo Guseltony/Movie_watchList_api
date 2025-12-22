@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // port
 
-const PORT = 5555;
 
 // api endpoints
 
@@ -25,8 +24,7 @@ app.use("/auth", authRoute);
 app.use("/watchlist", watchlistRoute);
 
 // app listen to port
-
-app.listen(PORT, () => {
+const server = app.listen(process.env.PORT || 5555, "0.0.0.0", () => {
   console.log(`server running on port ${PORT}`);
 });
 
@@ -35,7 +33,7 @@ app.listen(PORT, () => {
 // handle unhandled promise rejections (e.g database connection errors)
 process.on("unhandledRejection", (err) => {
   console.error("Unhandled Rejection:", err);
-  ServiceWorkerRegistration.close(async () => {
+  server.close(async () => {
     await disconnectDB();
     process.exit(1);
   });
